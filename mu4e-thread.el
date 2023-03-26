@@ -332,18 +332,6 @@ been set individually."
     (mu4e-thread-unfold)
     (mu4e-thread-goto-next)))
 
-;; Key bindings
-(bind-key "<S-left>"  #'mu4e-thread-goto-root 'mu4e-headers-mode-map)
-(bind-key "<S-down>"  #'mu4e-thread-goto-next 'mu4e-headers-mode-map)
-(bind-key "<S-up>"    #'mu4e-thread-goto-prev 'mu4e-headers-mode-map)
-(bind-key "<tab>"     #'mu4e-thread-fold-toggle-goto-next 'mu4e-headers-mode-map)
-(bind-key "<backtab>" #'mu4e-thread-fold-toggle-all 'mu4e-headers-mode-map)
 
-;; This enforces folding after a new search
-(add-hook 'mu4e-headers-found-hook #'mu4e-thread-fold-apply-all)
-
-;; This prevents marking messages when folded
-(advice-add #'mu4e-headers-mark-and-next :around #'mu4e-thread/mark-and-next)
-
-(provide 'mu4e-thread.el)
+(provide 'mu4e-thread)
 ;;; mu4e-thread.el ends here
