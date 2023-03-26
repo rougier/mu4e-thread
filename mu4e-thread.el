@@ -55,9 +55,10 @@
 ;;
 ;; Version 0.1.0
 ;; - Initial release
+;;
+;;; Code
 (require 'mu4e)
 
-;;; Code
 (defcustom mu4e-thread-fold-unread nil
   "Whether to fold unread messages in a thread."
   :group 'mu4e-headers)
