@@ -245,7 +245,7 @@ been set individually."
     (mu4e-thread-fold)))
 
 (defun mu4e-thread-fold-toggle-goto-next ()
-  "Toggle folding for thread at point"
+  "Toggle folding for thread at point and go to next thread."
 
   (interactive)
   (if (mu4e-thread-is-folded)
