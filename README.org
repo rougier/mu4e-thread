@@ -1,0 +1,26 @@
+
+[[file:mu4e-thread.el][mu4e-thread.el]] is a library that allows to fold and unfold threads in mu4e headers mode. Folding works by creating an overlay over thread children that display a summary (number of hidden messages and possibly number of unread messages). Folding is perform just in time such that it is quite fast to fold/unfold threads. When a thread has unread messages, the folding stops at the first unread message unless `mu4e-thread-fold-unread` has been set to t.  Similarly, when a thread has marked messages, the folding stops at the first marked message and it is strongly advised to disable marking on folded messages as explained in usage example.
+
+** Usage example:
+
+*** Key bindings
+
+#+begin_src emacs-lisp
+(bind-key "<S-left>"  #'mu4e-thread-goto-root 'mu4e-headers-mode-map)
+(bind-key "<S-down>"  #'mu4e-thread-goto-next 'mu4e-headers-mode-map)
+(bind-key "<S-up>"    #'mu4e-thread-goto-prev 'mu4e-headers-mode-map)
+(bind-key "<tab>"     #'mu4e-thread-fold-toggle-goto-next 'mu4e-headers-mode-map)
+(bind-key "<backtab>" #'mu4e-thread-fold-toggle-all 'mu4e-headers-mode-map)
+#+end_src
+
+*** Folding after search
+
+#+begin_src emacs-lisp
+(add-hook 'mu4e-headers-found-hook #'mu4e-thread-fold-apply-all)
+#+end_src
+
+*** No marking when messages are folded
+
+#+begin_src emacs-lisp
+(advice-add #'mu4e-headers-mark-and-next :around #'mu4e-thread/mark-and-next)
+#+end_src
