@@ -292,16 +292,16 @@ been set individually."
                          (while (and (not (eobp))
                                      (get-text-property (point) 'msg)
                                      (and thread-end (< (point) thread-end)))
-                           (when-let* ((msg (get-text-property (point) 'msg)))
-                             (let* ((docid (mu4e-message-field msg :docid))
-                                    (flags (mu4e-message-field msg :flags))
-                                    (unread (memq 'unread flags)))
-                               (when (mu4e-mark-docid-marked-p docid)
-                                 (throw 'fold-end (point)))
-                               (when unread
-                                 (setq unread-count (+ 1 unread-count))
-                                 (unless mu4e-thread-fold-unread
-                                   (throw 'fold-end (point))))))
+                           (let* ((msg (get-text-property (point) 'msg))
+                                  (docid (mu4e-message-field msg :docid))
+                                  (flags (mu4e-message-field msg :flags))
+                                  (unread (memq 'unread flags)))
+                             (when (mu4e-mark-docid-marked-p docid)
+                               (throw 'fold-end (point)))
+                             (when unread
+                               (setq unread-count (+ 1 unread-count))
+                               (unless mu4e-thread-fold-unread
+                                 (throw 'fold-end (point)))))
                            (forward-line)))
                        (point))))
       
