@@ -102,7 +102,7 @@ messages and UNREAD messages."
   "Test if message at point is the root of the current thread"
   
   (when-let* ((msg (get-text-property (point) 'msg))
-              (meta (when msg (mu4e-message-field msg :meta))))
+              (meta (mu4e-message-field msg :meta)))
     (let* ((orphan (plist-get meta :orphan))
            (first-child (plist-get meta :first-child))
            (root (plist-get meta :root)))
