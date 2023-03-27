@@ -101,11 +101,11 @@ messages and UNREAD messages."
 (defun mu4e-thread-is-root ()
   "Test if message at point is the root of the current thread"
   
-  (when-let* ((msg (get-text-property (point) 'msg)))
-    (let* ((meta (when msg (mu4e-message-field msg :meta)))
-           (orphan (when meta (plist-get meta :orphan)))
-           (first-child (when meta (plist-get meta :first-child)))
-           (root (when meta (plist-get meta :root))))
+  (when-let* ((msg (get-text-property (point) 'msg))
+              (meta (when msg (mu4e-message-field msg :meta))))
+    (let* ((orphan (plist-get meta :orphan))
+           (first-child (plist-get meta :first-child))
+           (root (plist-get meta :root)))
       (or root (and orphan first-child)))))
 
 (defun mu4e-thread-goto-root ()
