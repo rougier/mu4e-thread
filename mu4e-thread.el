@@ -93,7 +93,7 @@ messages and UNREAD messages."
             (beg (overlay-start overlay))
             (end (overlay-end overlay))
             (folded (and (>= (point) beg) (< (point) end))))
-      (message "Cannot mark when folded")
+      (mu4e-warn "Cannot mark when folded")
     (apply orig-fun args)))
 
 
