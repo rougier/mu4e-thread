@@ -91,10 +91,9 @@ messages and UNREAD messages."
   
   (if-let* ((overlay (mu4e-thread-is-folded))
             (beg (overlay-start overlay))
-            (end (overlay-end overlay)))
-      (if (and (>= (point) beg) (< (point) end))
-          (message "Cannot mark when folded")
-        (apply orig-fun args))
+            (end (overlay-end overlay))
+            (folded (and (>= (point) beg) (< (point) end))))
+      (message "Cannot mark when folded")
     (apply orig-fun args)))
 
 
