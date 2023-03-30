@@ -298,23 +298,22 @@ been set individually."
                              (when (mu4e-mark-docid-marked-p docid)
                                (throw 'fold-end (point)))
                              (when unread
-                               (setq unread-count (+ 1 unread-count))
                                (unless mu4e-thread-fold-unread
-                                 (throw 'fold-end (point)))))
+                                 (throw 'fold-end (point)))
+                               (setq unread-count (+ 1 unread-count))))
                            (forward-line)))
                        (point))))
-      
       (unless no-save
         (mu4e-thread--save-state 'folded))
-    
       (let ((child-count (count-lines fold-beg fold-end))
             (unread-count (if mu4e-thread-fold-unread unread-count 0)))
         (when (> child-count 1)
           (let ((inhibit-read-only t)
-                (overlay (make-overlay fold-beg fold-end)))
+                (overlay (make-overlay fold-beg fold-end))
+                (info (mu4e-thread-fold-info child-count unread-count)))
             (add-text-properties fold-beg (+ fold-beg 1) '(face mu4e-thread-fold-face))
             (overlay-put overlay 'mu4e-thread-folded t)
-            (overlay-put overlay 'display (mu4e-thread-fold-info child-count unread-count))))))))
+            (overlay-put overlay 'display info)))))))
 
 (defun mu4e-thread-fold-goto-next ()
   "Fold the thread at point and go to next thread"
